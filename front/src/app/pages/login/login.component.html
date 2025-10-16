@@ -1,0 +1,39 @@
+<div class="login-container">
+  <h2>Bienvenido</h2>
+
+  <!-- 🔹 Login con Google -->
+  <button class="google-btn" (click)="loginGoogle()">
+    <img
+      src="https://developers.google.com/identity/images/g-logo.png"
+      alt="Google Logo"
+      width="20"
+      style="margin-right: 8px; vertical-align: middle"
+    />
+    Ingresar con Google
+  </button>
+
+  <h3>O con tu correo</h3>
+
+  <!-- 🔹 Login con email/password -->
+  <div class="form-group">
+    <input [(ngModel)]="email" type="email" placeholder="Correo electrónico" />
+    <input [(ngModel)]="password" type="password" placeholder="Contraseña" />
+    <button (click)="loginWithPassword()" [disabled]="loading">
+      {{ loading ? 'Ingresando...' : 'Ingresar' }}
+    </button>
+  </div>
+
+  <p class="error" *ngIf="errorMessage">{{ errorMessage }}</p>
+
+  <!-- Links -->
+  <div class="login-footer">
+    <p>
+      ¿No tienes cuenta?
+      <a routerLink="/register" class="link-to-register">Regístrate aquí</a>
+    </p>
+    <p>
+      ¿Prefieres otro método?
+      <a routerLink="/otp" class="link-to-otp">Inicia con código temporal</a>
+    </p>
+  </div>
+</div>

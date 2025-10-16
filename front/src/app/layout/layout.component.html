@@ -1,0 +1,46 @@
+<header class="app-header">
+  <div class="logo" (click)="navigateHome()">Nexo</div>
+
+  <nav>
+    <!-- 🔹 Si NO hay sesión -->
+    <ng-container *ngIf="!isLoggedIn">
+      <a routerLink="/login" class="btn-nav btn-primary">Iniciar sesión</a>
+      <a routerLink="/register" class="btn-nav btn-secondary">Registrarse</a>
+    </ng-container>
+
+    <!-- 🔹 Si SÍ hay sesión -->
+    <ng-container *ngIf="isLoggedIn">
+      <!-- Botón fijo para Comunidades -->
+      <a routerLink="/groups" class="btn-nav btn-primary">Comunidades</a>
+
+      <div class="user-menu" (click)="toggleMenu()">
+        <!-- Avatar dinámico -->
+        <div class="avatar">
+          <img *ngIf="userPicture" [src]="userPicture" alt="User Avatar" />
+          <span *ngIf="!userPicture">{{ userInitial }}</span>
+        </div>
+
+        <!-- Email o "Mi Cuenta" -->
+        <span class="user-name">{{ userEmail || 'Mi Cuenta' }} ▾</span>
+
+        <!-- Dropdown -->
+        <ul class="dropdown" *ngIf="menuOpen">
+          <li><a routerLink="/profile">Perfil</a></li>
+          <li><a routerLink="/dashboard">Panel</a></li>
+          <li><a routerLink="/groups">Comunidades</a></li>
+          <li>
+            <button class="logout-btn" (click)="logout()">Cerrar sesión</button>
+          </li>
+        </ul>
+      </div>
+    </ng-container>
+  </nav>
+</header>
+
+<main class="app-content">
+  <router-outlet></router-outlet>
+</main>
+
+<footer class="app-footer">
+  <p>© 2025 Nexo. Todos los derechos reservados.</p>
+</footer>

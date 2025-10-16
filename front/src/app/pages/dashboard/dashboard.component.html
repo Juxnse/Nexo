@@ -1,0 +1,33 @@
+<div class="dashboard-container">
+  <!-- Header -->
+  <header class="dashboard-header">
+    <h2>Bienvenido a tu panel</h2>
+    <p *ngIf="userEmail">
+      Has iniciado sesión como <strong>{{ userEmail }}</strong>
+    </p>
+  </header>
+
+  <!-- Secciones del dashboard -->
+  <section class="dashboard-grid">
+    <!-- Perfil -->
+    <div class="card">
+      <h3>Tu perfil</h3>
+      <p>Consulta y actualiza tu información personal.</p>
+      <a routerLink="/profile" class="btn btn-primary">Ver perfil</a>
+    </div>
+
+    <!-- Comunidades -->
+    <div class="card">
+      <h3>Comunidades</h3>
+      <p>Explora las comunidades existentes o crea la tuya propia.</p>
+      <a routerLink="/groups" class="btn btn-primary">Ver comunidades</a>
+      <br /><br />
+      <a routerLink="/groups/create" class="btn btn-primary">Crear comunidad</a>
+    </div>
+  </section>
+
+  <!-- Acciones -->
+  <div class="dashboard-actions">
+    <button class="btn-logout" (click)="logout()">Cerrar sesión</button>
+  </div>
+</div>

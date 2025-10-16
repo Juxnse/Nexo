@@ -1,0 +1,37 @@
+<div class="create-group">
+  <h2>Crear nueva comunidad</h2>
+
+  <form (ngSubmit)="createGroup()">
+    <label>Nombre</label>
+    <input [(ngModel)]="name" name="name" required />
+
+    <label>Descripción</label>
+    <textarea [(ngModel)]="description" name="description"></textarea>
+
+    <label>Visibilidad</label>
+    <select [(ngModel)]="visibility" name="visibility">
+      <option value="public">Pública</option>
+      <option value="private">Privada</option>
+    </select>
+
+    <label>Política de unión</label>
+    <select [(ngModel)]="join_policy" name="join_policy">
+      <option value="open">Abierta</option>
+      <option value="request">Solicitud</option>
+      <option value="invite">Invitación</option>
+    </select>
+
+    <label>Ciudad</label>
+    <input [(ngModel)]="city" name="city" />
+
+    <label>País</label>
+    <input [(ngModel)]="country" name="country" />
+
+    <label>Tags (separados por coma)</label>
+    <input [(ngModel)]="tags" name="tags" />
+
+    <button type="submit" [disabled]="creating">
+      {{ creating ? 'Creando...' : 'Crear grupo' }}
+    </button>
+  </form>
+</div>

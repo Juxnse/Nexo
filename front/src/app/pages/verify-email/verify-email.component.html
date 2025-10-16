@@ -1,0 +1,11 @@
+<div class="verify-container">
+  <h2>Verificación de correo</h2>
+
+  <div *ngIf="loading">
+    <p>Verificando tu cuenta...</p>
+  </div>
+
+  <div *ngIf="!loading">
+    <p>{{ message }}</p>
+  </div>
+</div>

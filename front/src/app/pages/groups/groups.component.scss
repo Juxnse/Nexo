@@ -1,0 +1,71 @@
+.groups-page {
+  padding: 1rem;
+
+  h2 {
+    margin-bottom: 1.5rem;
+    font-size: 1.8rem;
+    font-weight: bold;
+    color: #1976d2;
+  }
+
+  .loading,
+  .empty {
+    text-align: center;
+    font-style: italic;
+    color: #777;
+    margin: 1rem 0;
+  }
+
+  .group-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 1rem;
+  }
+
+  .group-card {
+    background: #fff;
+    border: 1px solid #ddd;
+    border-radius: 12px;
+    padding: 1rem;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+    h3 {
+      margin: 0;
+      color: #333;
+    }
+
+    .description {
+      font-size: 0.9rem;
+      color: #555;
+      margin: 0.5rem 0;
+    }
+
+    .location {
+      font-size: 0.85rem;
+      color: #777;
+    }
+
+    .group-footer {
+      margin-top: 1rem;
+      text-align: right;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 0.4rem 0.8rem;
+      background: #1976d2;
+      color: white;
+      border-radius: 6px;
+      text-decoration: none;
+      font-size: 0.9rem;
+      transition: background 0.2s;
+
+      &:hover {
+        background: #135ba1;
+      }
+    }
+  }
+}

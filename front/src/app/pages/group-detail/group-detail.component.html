@@ -1,0 +1,70 @@
+<div class="group-detail">
+  <div class="group-header" *ngIf="group">
+    <h2>{{ group.name }}</h2>
+    <p class="description">{{ group.description }}</p>
+    <p class="location">{{ group.city }}, {{ group.country }}</p>
+  </div>
+
+  <!-- Tabs -->
+  <nav class="tabs">
+    <button [class.active]="activeTab === 'posts'" (click)="setTab('posts')">
+      Publicaciones
+    </button>
+    <button [class.active]="activeTab === 'members'" (click)="setTab('members')">
+      Miembros
+    </button>
+    <button [class.active]="activeTab === 'events'" (click)="setTab('events')">
+      Eventos
+    </button>
+  </nav>
+
+  <!-- Contenido dinámico -->
+  <div class="tab-content">
+    <!-- POSTS -->
+    <ng-container *ngIf="activeTab === 'posts'">
+      <div class="create-post">
+        <textarea [(ngModel)]="newPost" placeholder="Escribe tu publicación..."></textarea>
+        <button (click)="createPost()" [disabled]="creatingPost || !newPost.trim()">
+          {{ creatingPost ? 'Publicando...' : 'Publicar' }}
+        </button>
+      </div>
+
+      <div *ngIf="loadingPosts">Cargando posts...</div>
+      <div *ngIf="!loadingPosts && posts.length === 0">No hay publicaciones todavía.</div>
+
+      <div class="post-card" *ngFor="let post of posts">
+        <div class="author">
+          <img *ngIf="post.author.picture" [src]="post.author.picture" alt="avatar" />
+          <strong>{{ post.author.name || post.author.email }}</strong>
+          <span>{{ post.created_at | date: 'short' }}</span>
+        </div>
+        <p>{{ post.content }}</p>
+      </div>
+    </ng-container>
+
+    <!-- MEMBERS -->
+    <ng-container *ngIf="activeTab === 'members'">
+      <div *ngIf="loadingMembers">Cargando miembros...</div>
+      <div *ngIf="!loadingMembers && members.length === 0">No hay miembros todavía.</div>
+
+      <!-- Botón unirse -->
+      <div class="join-group" *ngIf="currentUserId && !isMemberActive()">
+        <button (click)="joinGroup()" [disabled]="joining">
+          {{ joining ? 'Uniéndose...' : 'Unirme al grupo' }}
+        </button>
+      </div>
+
+      <!-- Listado -->
+      <div class="member-card" *ngFor="let m of members">
+        <strong>{{ m.user.name || m.user.email }}</strong>
+        <span>Rol: {{ m.role }}</span>
+        <span>Status: {{ m.status }}</span>
+      </div>
+    </ng-container>
+
+    <!-- EVENTS -->
+    <ng-container *ngIf="activeTab === 'events'">
+      <p>Aquí irán los eventos del grupo...</p>
+    </ng-container>
+  </div>
+</div>

@@ -1,0 +1,26 @@
+<div class="otp-container">
+  <h2>Acceso con código temporal</h2>
+
+  <!-- Paso 1: ingresar email -->
+  <div *ngIf="step === 'request'">
+    <p>Ingresa tu correo y te enviaremos un código de 6 dígitos.</p>
+    <input [(ngModel)]="email" type="email" placeholder="Correo electrónico" />
+    <button (click)="requestOtp()" [disabled]="loading">Enviar código</button>
+  </div>
+
+  <!-- Paso 2: ingresar código -->
+  <div *ngIf="step === 'verify'">
+    <p>Ingresa el código que recibiste en tu correo.</p>
+    <input [(ngModel)]="code" type="text" maxlength="6" placeholder="Código OTP" />
+    <button (click)="verifyOtp()" [disabled]="loading">Verificar código</button>
+  </div>
+
+  <!-- Mensajes -->
+  <p *ngIf="message" class="success-msg">{{ message }}</p>
+  <p *ngIf="errorMessage" class="error-msg">{{ errorMessage }}</p>
+
+  <!-- Footer -->
+  <div class="otp-footer">
+    <a routerLink="/login" class="link-back">Volver al login</a>
+  </div>
+</div>
