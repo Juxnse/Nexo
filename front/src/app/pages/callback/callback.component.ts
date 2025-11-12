@@ -18,14 +18,27 @@ export class CallbackComponent implements OnInit {
   ) {}
 
   ngOnInit() {
+    // Suscribirse a los parámetros de la URL
     this.route.queryParams.subscribe((params) => {
-      const token = params['token'];
+      let token = params['token'];
+
+      // 🔹 Si el token llega en el fragmento (#token=xxx)
+      if (!token && window.location.hash.includes('token=')) {
+        const hashParams = new URLSearchParams(window.location.hash.substring(1));
+        token = hashParams.get('token') || '';
+      }
+
       if (token) {
+        // Guardar token en localStorage
         this.authService.saveToken(token);
 
-        //Redirigimos al dashboard
-        setTimeout(() => this.router.navigate(['/dashboard']), 1500);
+        // 🔹 Forzar actualización del estado de sesión
+        console.log('✅ Token recibido y guardado');
+        setTimeout(() => {
+          this.router.navigate(['/dashboard']);
+        }, 1000);
       } else {
+        console.warn('⚠️ Token no encontrado en callback');
         this.router.navigate(['/login']);
       }
     });

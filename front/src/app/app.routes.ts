@@ -10,7 +10,7 @@ import { LayoutComponent } from './layout/layout.component';
 import { HomeComponent } from './pages/home/home.component';
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
 
-// 👇 importa los grupos
+// 👥 Comunidades
 import { GroupsComponent } from './pages/groups/groups.component';
 import { GroupDetailComponent } from './pages/group-detail/group-detail.component';
 import { GroupsCreateComponent } from './pages/groups-create/groups-create.component';
@@ -20,20 +20,22 @@ export const appRoutes: Routes = [
     path: '',
     component: LayoutComponent,
     children: [
+      // 🌍 Públicas
       { path: '', component: HomeComponent },
       { path: 'login', component: LoginComponent },
       { path: 'register', component: RegisterComponent },
       { path: 'verify-email', component: VerifyEmailComponent },
       { path: 'otp', component: OtpComponent },
-      { path: 'profile', component: ProfileComponent, canActivate: [authGuard] },
       { path: 'callback', component: CallbackComponent },
+
+      // 🔐 Privadas
+      { path: 'profile', component: ProfileComponent, canActivate: [authGuard] },
       { path: 'dashboard', component: DashboardComponent, canActivate: [authGuard] },
-
-      // 👇 rutas de grupos
-      { path: 'groups', component: GroupsComponent },
+      { path: 'groups', component: GroupsComponent, canActivate: [authGuard] },
       { path: 'groups/create', component: GroupsCreateComponent, canActivate: [authGuard] },
-      { path: 'groups/:id', component: GroupDetailComponent },
+      { path: 'groups/:id', component: GroupDetailComponent, canActivate: [authGuard] },
 
+      // 🚨 Fallback
       { path: '**', redirectTo: '' },
     ],
   },

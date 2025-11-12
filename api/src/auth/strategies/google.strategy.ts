@@ -1,6 +1,6 @@
 import { PassportStrategy } from '@nestjs/passport';
 import { Injectable } from '@nestjs/common';
-import { Strategy, VerifyCallback } from 'passport-google-oauth20';
+import { Strategy } from 'passport-google-oauth20';
 import { ConfigService } from '@nestjs/config';
 
 @Injectable()
@@ -15,20 +15,14 @@ export class GoogleStrategy extends PassportStrategy(Strategy, 'google') {
   }
 
   authorizationParams(): { [key: string]: string } {
-    return {
-      prompt: 'select_account', // fuerza a elegir cuenta de Google
-    };
+    return { prompt: 'select_account' };
   }
 
-  async validate(
-    accessToken: string,
-    refreshToken: string,
-    profile: any,
-    done: VerifyCallback,
-  ): Promise<any> {
+  // 🔹 Esta versión es la correcta: devuelve el objeto directamente (sin "done")
+  async validate(accessToken: string, refreshToken: string, profile: any): Promise<any> {
     const { sub, email, picture, name, given_name, family_name } = profile._json;
 
-    const user = {
+    return {
       email,
       name:
         name ||
@@ -36,9 +30,7 @@ export class GoogleStrategy extends PassportStrategy(Strategy, 'google') {
         `${given_name || ''} ${family_name || ''}`.trim() ||
         email,
       picture: picture || null,
-      googleId: sub, // ID único de Google
+      googleId: sub,
     };
-
-    done(null, user);
   }
 }

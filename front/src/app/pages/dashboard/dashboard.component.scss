@@ -1,69 +1,152 @@
 .dashboard-container {
-  max-width: 1100px;
+  max-width: 1200px;
   margin: 3rem auto;
   padding: 2.5rem;
   background: #fff;
   border-radius: 20px;
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
   font-family: 'Poppins', 'Segoe UI', sans-serif;
   animation: fadeIn 0.4s ease-in-out;
 
   .dashboard-header {
-    text-align: center;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
     margin-bottom: 2rem;
+    gap: 1.2rem;
 
-    h2 {
-      font-size: 2.2rem;
-      font-weight: 700;
-      color: #1976d2;
-      margin-bottom: 0.5rem;
+    .user-info {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+
+      .avatar {
+        width: 60px;
+        height: 60px;
+        border-radius: 50%;
+        overflow: hidden;
+        border: 3px solid #1976d2;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        &.placeholder {
+          background: #1976d2;
+          color: white;
+          font-size: 1.5rem;
+          font-weight: 600;
+        }
+      }
+
+      .user-text {
+        h2 {
+          font-size: 1.8rem;
+          color: #1976d2;
+          font-weight: 700;
+          margin: 0;
+        }
+
+        p {
+          color: #555;
+          font-size: 1rem;
+        }
+      }
     }
 
-    p {
-      font-size: 1rem;
-      color: #555;
+    .btn-logout {
+      background: #d32f2f;
+      color: white;
+      border: none;
+      padding: 0.8rem 1.6rem;
+      border-radius: 10px;
+      font-weight: 600;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      transition: all 0.3s ease;
+
+      &:hover {
+        background: #b71c1c;
+        transform: translateY(-2px);
+      }
     }
   }
 
   .dashboard-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 1.5rem;
-    margin-bottom: 2rem;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 1.8rem;
 
     .card {
-      background: #f9f9f9;
+      background: #f9fafc;
       border-radius: 16px;
-      padding: 1.8rem;
+      padding: 2rem 1.5rem;
       text-align: center;
-      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08);
-      transition: transform 0.2s ease, box-shadow 0.2s ease;
+      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.05);
+      transition: all 0.25s ease-in-out;
 
       &:hover {
         transform: translateY(-5px);
-        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+        box-shadow: 0 10px 22px rgba(0, 0, 0, 0.1);
+      }
+
+      .icon {
+        width: 60px;
+        height: 60px;
+        margin: 0 auto 1rem;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        font-size: 1.5rem;
+
+        &.profile {
+          background: #42a5f5;
+        }
+
+        &.community {
+          background: #1e88e5;
+        }
+
+        &.events {
+          background: #43a047;
+        }
+
+        &.notifications {
+          background: #ffb300;
+        }
       }
 
       h3 {
-        font-size: 1.4rem;
-        font-weight: 600;
         color: #1976d2;
-        margin-bottom: 0.6rem;
+        font-weight: 600;
+        margin-bottom: 0.5rem;
       }
 
       p {
-        font-size: 0.95rem;
         color: #666;
         margin-bottom: 1.2rem;
+        font-size: 0.95rem;
+      }
+
+      .actions {
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 0.8rem;
       }
 
       .btn {
-        padding: 0.7rem 1.4rem;
+        padding: 0.6rem 1.3rem;
         border-radius: 8px;
         font-weight: 600;
         text-decoration: none;
+        font-size: 0.9rem;
         display: inline-block;
-        transition: all 0.2s ease;
+        transition: all 0.25s ease;
 
         &.btn-primary {
           background: linear-gradient(90deg, #1976d2, #0d47a1);
@@ -74,26 +157,117 @@
             transform: translateY(-2px);
           }
         }
+
+        &.btn-outline {
+          border: 2px solid #1976d2;
+          color: #1976d2;
+          background: transparent;
+
+          &:hover {
+            background: #1976d2;
+            color: #fff;
+          }
+        }
+
+        &.btn-disabled {
+          background: #ccc;
+          color: #fff;
+          cursor: not-allowed;
+        }
       }
     }
   }
+}
 
-  .dashboard-actions {
-    text-align: center;
+/* Eventos destacados */
+.featured-events {
+  margin-top: 3rem;
 
-    .btn-logout {
-      padding: 0.9rem 2rem;
+  h3 {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #0d47a1;
+    margin-bottom: 1rem;
+    text-align: left;
+  }
+
+  .events-scroll {
+    display: flex;
+    gap: 1.2rem;
+    overflow-x: auto;
+    padding-bottom: 1rem;
+    scroll-behavior: smooth;
+
+    &::-webkit-scrollbar {
+      height: 8px;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      background: #1976d2;
       border-radius: 8px;
-      font-weight: 600;
-      border: none;
-      cursor: pointer;
-      background: #d32f2f;
-      color: #fff;
-      transition: background 0.3s ease, transform 0.2s ease;
+    }
+
+    &::-webkit-scrollbar-track {
+      background: #e3f2fd;
+    }
+
+    .event-card {
+      min-width: 280px;
+      background: #fff;
+      border-radius: 14px;
+      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
+      flex: 0 0 auto;
+      transition: all 0.25s ease-in-out;
+      overflow: hidden;
 
       &:hover {
-        background: #b71c1c;
-        transform: translateY(-2px);
+        transform: translateY(-5px);
+        box-shadow: 0 10px 22px rgba(0, 0, 0, 0.15);
+      }
+
+      .event-banner {
+        height: 120px;
+        background: linear-gradient(90deg, #1976d2, #0d47a1);
+      }
+
+      .event-info {
+        padding: 1rem;
+
+        h4 {
+          margin: 0 0 0.3rem 0;
+          color: #0d47a1;
+          font-weight: 600;
+          font-size: 1rem;
+        }
+
+        p {
+          color: #555;
+          font-size: 0.9rem;
+          margin: 0.2rem 0;
+
+          &.date {
+            color: #1976d2;
+            font-weight: 600;
+          }
+        }
+
+        .btn-view {
+          display: inline-block;
+          margin-top: 0.5rem;
+          font-size: 0.85rem;
+          font-weight: 600;
+          color: #1976d2;
+          text-decoration: none;
+          border: 1.5px solid #1976d2;
+          padding: 0.4rem 0.8rem;
+          border-radius: 6px;
+          transition: all 0.25s ease;
+
+          &:hover {
+            background: #1976d2;
+            color: white;
+          }
+        }
       }
     }
   }

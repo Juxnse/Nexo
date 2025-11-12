@@ -1,26 +1,26 @@
-<div class="groups-page">
-  <h2>Comunidades</h2>
+  <div class="groups-page">
+    <h2>Comunidades</h2>
 
-  <div *ngIf="loading" class="loading">
-    Cargando comunidades...
-  </div>
+    <div *ngIf="loading" class="loading">
+      Cargando comunidades...
+    </div>
 
-  <div *ngIf="!loading && groups.length === 0" class="empty">
-    No se encontraron grupos.
-  </div>
+    <div *ngIf="!loading && groups.length === 0" class="empty">
+      No se encontraron grupos.
+    </div>
 
-  <div class="group-list" *ngIf="!loading && groups.length > 0">
-    <div class="group-card" *ngFor="let g of groups">
-      <div class="group-header">
-        <div>
-          <h3>{{ g.name }}</h3>
-          <p class="description">{{ g.description }}</p>
-          <span class="location">{{ g.city }}, {{ g.country }}</span>
+    <div class="group-list" *ngIf="!loading && groups.length > 0">
+      <div class="group-card" *ngFor="let g of groups">
+        <div class="group-header">
+          <div>
+            <h3>{{ g.name }}</h3>
+            <p class="description">{{ g.description }}</p>
+            <span class="location">{{ g.city }}, {{ g.country }}</span>
+          </div>
         </div>
-      </div>
-      <div class="group-footer">
-        <a [routerLink]="['/groups', g.id]" class="btn">Ver más</a>
+        <div class="group-footer">
+          <a [routerLink]="['/groups', g.id]" class="btn">Ver más</a>
+        </div>
       </div>
     </div>
   </div>
-</div>

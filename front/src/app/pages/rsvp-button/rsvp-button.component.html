@@ -1,0 +1,30 @@
+<p>rsvp-button works!</p>
+<div class="rsvp-buttons" *ngIf="!loading; else loadingTpl">
+  <button
+    class="rsvp going"
+    [class.active]="currentStatus === 'going'"
+    (click)="setStatus('going')"
+  >
+    ✅ Asistiré
+  </button>
+
+  <button
+    class="rsvp interested"
+    [class.active]="currentStatus === 'interested'"
+    (click)="setStatus('interested')"
+  >
+    ⭐ Me interesa
+  </button>
+
+  <button
+    class="rsvp not-going"
+    [class.active]="currentStatus === 'not_going'"
+    (click)="setStatus('not_going')"
+  >
+    ❌ No asistiré
+  </button>
+</div>
+
+<ng-template #loadingTpl>
+  <p>Guardando tu respuesta...</p>
+</ng-template>

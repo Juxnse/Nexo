@@ -1,0 +1,83 @@
+<div class="group-events">
+  <!-- CREAR EVENTO -->
+  <div class="create-event">
+    <h3><i class="fa-solid fa-calendar-plus"></i> Crear nuevo evento</h3>
+
+    <input type="text" [(ngModel)]="newEvent.title" placeholder="Título del evento" />
+    <textarea [(ngModel)]="newEvent.description" placeholder="Descripción (opcional)"></textarea>
+
+    <div class="dates">
+      <div>
+        <label>Inicio:</label>
+        <input type="datetime-local" [(ngModel)]="newEvent.start_at" />
+      </div>
+      <div>
+        <label>Fin:</label>
+        <input type="datetime-local" [(ngModel)]="newEvent.end_at" />
+      </div>
+    </div>
+
+    <input type="text" [(ngModel)]="newEvent.venue_name" placeholder="Lugar o link del evento" />
+    <input type="number" [(ngModel)]="newEvent.capacity" placeholder="Capacidad (opcional)" />
+
+    <button (click)="createEvent()" [disabled]="creating">
+      <i class="fa-solid fa-circle-check"></i>
+      {{ creating ? 'Creando...' : 'Crear evento' }}
+    </button>
+  </div>
+
+  <!-- LISTADO DE EVENTOS -->
+  <div class="event-list">
+    <h3><i class="fa-solid fa-calendar-days"></i> Próximos eventos</h3>
+
+    <div *ngIf="events.length === 0" class="no-events">
+      No hay eventos aún.
+    </div>
+
+    <div *ngFor="let ev of events" class="event-card">
+      <div class="event-banner"></div>
+      <div class="event-info">
+        <h4>{{ ev.title }}</h4>
+        <p class="desc">{{ ev.description || 'Sin descripción' }}</p>
+
+        <p class="datetime">
+          <i class="fa-regular fa-clock"></i>
+          {{ ev.start_at | date: 'mediumDate' }} - {{ ev.start_at | date: 'shortTime' }}
+        </p>
+
+        <p class="venue">
+          <i class="fa-solid fa-location-dot"></i>
+          {{ ev.venue_name || 'Por definir' }}
+          <span *ngIf="ev.capacity"> | Capacidad: {{ ev.capacity }}</span>
+        </p>
+
+        <!-- BOTONES DE ASISTENCIA -->
+        <div class="rsvp-buttons">
+          <button
+            class="btn attending"
+            [class.active]="ev.user_status === 'attending'"
+            (click)="setRSVP(ev, 'attending')"
+          >
+            <i class="fa-solid fa-check"></i> Asistiré
+          </button>
+
+          <button
+            class="btn interested"
+            [class.active]="ev.user_status === 'interested'"
+            (click)="setRSVP(ev, 'interested')"
+          >
+            <i class="fa-solid fa-star"></i> Interesado
+          </button>
+
+          <button
+            class="btn decline"
+            [class.active]="ev.user_status === 'declined'"
+            (click)="setRSVP(ev, 'declined')"
+          >
+            <i class="fa-solid fa-xmark"></i> No asistiré
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

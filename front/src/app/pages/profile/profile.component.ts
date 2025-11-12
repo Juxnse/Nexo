@@ -29,6 +29,10 @@ export class ProfileComponent implements OnInit {
     });
   }
 
+  editProfile(){
+    
+  }
+
   logout() {
     this.auth.logout();
   }

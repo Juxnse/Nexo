@@ -1,0 +1,212 @@
+.group-events {
+  font-family: 'Poppins', 'Segoe UI', sans-serif;
+  margin-top: 1.5rem;
+}
+
+/* FORMULARIO CREAR EVENTO */
+.create-event {
+  background: #ffffff;
+  border-radius: 16px;
+  padding: 1.5rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  margin-bottom: 2rem;
+  transition: all 0.3s ease;
+
+  h3 {
+    margin-bottom: 0.5rem;
+    font-weight: 700;
+    color: #1565c0;
+
+    i {
+      margin-right: 0.5rem;
+      color: #1976d2;
+    }
+  }
+
+  input,
+  textarea {
+    padding: 0.7rem 1rem;
+    border-radius: 10px;
+    border: 1px solid #ccc;
+    font-size: 0.95rem;
+    transition: all 0.2s;
+
+    &:focus {
+      outline: none;
+      border-color: #1976d2;
+      box-shadow: 0 0 0 3px rgba(25, 118, 210, 0.15);
+    }
+  }
+
+  .dates {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+
+    label {
+      font-weight: 600;
+      color: #1565c0;
+      display: block;
+      margin-bottom: 0.25rem;
+    }
+
+    div {
+      flex: 1;
+      min-width: 180px;
+    }
+  }
+
+  button {
+    align-self: flex-end;
+    background: linear-gradient(90deg, #1565c0, #42a5f5);
+    color: white;
+    border: none;
+    padding: 0.7rem 1.5rem;
+    border-radius: 12px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: all 0.25s ease;
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+
+    &:hover:not(:disabled) {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 10px rgba(66, 165, 245, 0.35);
+    }
+
+    &:disabled {
+      background: #b0bec5;
+      cursor: not-allowed;
+    }
+  }
+}
+
+/* LISTADO DE EVENTOS */
+.event-list {
+  h3 {
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: #0d47a1;
+    margin-bottom: 1.2rem;
+
+    i {
+      margin-right: 0.4rem;
+      color: #1976d2;
+    }
+  }
+
+  .no-events {
+    text-align: center;
+    color: #666;
+    font-style: italic;
+    margin-top: 0.8rem;
+  }
+
+  .event-card {
+    background: #fff;
+    border-radius: 16px;
+    overflow: hidden;
+    margin-bottom: 1rem;
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.07);
+    transition: all 0.25s ease-in-out;
+
+    &:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 10px 24px rgba(0, 0, 0, 0.1);
+    }
+
+    .event-banner {
+      height: 100px;
+      background: linear-gradient(90deg, #1565c0, #42a5f5);
+    }
+
+    .event-info {
+      padding: 1rem 1.2rem;
+
+      h4 {
+        margin: 0 0 0.3rem;
+        color: #0d47a1;
+        font-size: 1.15rem;
+        font-weight: 700;
+      }
+
+      .desc {
+        color: #444;
+        margin: 0 0 0.6rem;
+      }
+
+      .datetime,
+      .venue {
+        color: #555;
+        font-size: 0.9rem;
+        margin: 0.3rem 0;
+
+        i {
+          color: #1565c0;
+          margin-right: 0.4rem;
+        }
+      }
+
+      /* Botones RSVP */
+      .rsvp-buttons {
+        display: flex;
+        gap: 0.6rem;
+        margin-top: 0.8rem;
+        flex-wrap: wrap;
+
+        .btn {
+          padding: 0.4rem 1rem;
+          border-radius: 999px;
+          border: 2px solid transparent;
+          font-weight: 600;
+          cursor: pointer;
+          transition: all 0.25s ease;
+          font-size: 0.9rem;
+          display: flex;
+          align-items: center;
+          gap: 0.4rem;
+
+          &.attending {
+            background: #e3f2fd;
+            color: #1565c0;
+            border-color: transparent;
+
+            &.active {
+              background: #1565c0;
+              color: #fff;
+            }
+          }
+
+          &.interested {
+            background: #fff8e1;
+            color: #f57f17;
+
+            &.active {
+              background: #fbc02d;
+              color: #fff;
+            }
+          }
+
+          &.decline {
+            background: #ffebee;
+            color: #c62828;
+
+            &.active {
+              background: #c62828;
+              color: #fff;
+            }
+          }
+
+          &:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08);
+          }
+        }
+      }
+    }
+  }
+}

@@ -10,6 +10,7 @@ import { AuthModule } from './auth/auth.module';
 import { ProtectedController } from './protected.controller';
 import { GroupsModule } from './groups/groups.module'; // 👈 nuevo
 import { PostsModule } from './posts/posts.module';
+import { EventsModule } from './events/events.module';
 import { CommentsModule } from './comments/comments.module';
 import { LikesModule } from './likes/likes.module';
 
@@ -23,6 +24,10 @@ import { LikesModule } from './likes/likes.module';
     PostsModule,
     LikesModule,
     CommentsModule,
+
+    AuthModule,
+    GroupsModule,
+    EventsModule, // 👈 nuevo
 
     // Rate limiting: máx. 10 requests/min por IP
     ThrottlerModule.forRoot([

@@ -1,40 +1,41 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { CommonModule, NgFor, NgIf } from '@angular/common';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { PostsService, Post } from '../../core/posts.service';
 import { MembersService, Member } from '../../core/members.service';
 import { GroupsService, Group } from '../../core/groups.service';
 import { AuthService } from '../../core/auth.service';
+import { EventsComponent } from '../events/events.component';
 
 @Component({
   selector: 'app-group-detail',
   standalone: true,
-  imports: [CommonModule, NgFor, NgIf, FormsModule],
+  imports: [CommonModule, NgFor, NgIf, FormsModule, EventsComponent],
   templateUrl: './group-detail.component.html',
   styleUrls: ['./group-detail.component.scss'],
 })
 export class GroupDetailComponent implements OnInit {
+  @ViewChild(EventsComponent) eventsComponent?: EventsComponent;
+
   groupId!: string;
   group?: Group;
   activeTab: 'posts' | 'members' | 'events' = 'posts';
 
-  // POSTS
   posts: Post[] = [];
   newPost = '';
   loadingPosts = false;
   creatingPost = false;
 
-  // MEMBERS
   members: Member[] = [];
   loadingMembers = false;
   joining = false;
 
-  // Usuario actual
   currentUserId: string | null = null;
 
   constructor(
     private route: ActivatedRoute,
+    private router: Router,
     private postsService: PostsService,
     private membersService: MembersService,
     private groupsService: GroupsService,
@@ -50,25 +51,50 @@ export class GroupDetailComponent implements OnInit {
       this.loadMembers();
     }
 
+    // Leer tab desde la URL (?tab=events)
+    this.route.queryParams.subscribe((params) => {
+      const tab = params['tab'];
+      if (tab === 'posts' || tab === 'members' || tab === 'events') {
+        this.setTab(tab, false);
+      }
+    });
+
     // Obtener usuario actual
     this.auth.getProfile().subscribe({
-      next: (res) => {
-        this.currentUserId = res?.user?.id || null;
-      },
-      error: () => {
-        this.currentUserId = null;
-      },
+      next: (res) => (this.currentUserId = res?.user?.id || null),
+      error: () => (this.currentUserId = null),
     });
   }
 
-  setTab(tab: 'posts' | 'members' | 'events') {
+  /** Cambia de pestaña y actualiza la URL (?tab=...) */
+  setTab(tab: 'posts' | 'members' | 'events', updateUrl = true) {
+    if (this.activeTab === tab) return;
     this.activeTab = tab;
-    if (tab === 'posts') {
-      this.loadPosts();
+
+    if (updateUrl) {
+      this.router.navigate([], {
+        relativeTo: this.route,
+        queryParams: { tab },
+        queryParamsHandling: 'merge',
+      });
     }
-    if (tab === 'members') {
-      this.loadMembers();
+
+    if (tab === 'posts') this.loadPosts();
+    if (tab === 'members') this.loadMembers();
+    if (tab === 'events' && this.eventsComponent) {
+      this.eventsComponent.reloadEvents();
     }
+  }
+
+  /** Animación del indicador */
+  getTabIndicatorStyle() {
+    const index =
+      this.activeTab === 'posts'
+        ? 0
+        : this.activeTab === 'members'
+        ? 1
+        : 2;
+    return { transform: `translateX(${index * 100}%)` };
   }
 
   // ---- GROUP ----
@@ -139,7 +165,6 @@ export class GroupDetailComponent implements OnInit {
     });
   }
 
-  // Verificar si el usuario ya es miembro activo
   isMemberActive(): boolean {
     if (!this.currentUserId) return false;
     return this.members.some(

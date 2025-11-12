@@ -105,7 +105,7 @@ export class AuthService {
   }
 
   // 🔹 Chequear sesión
-  private hasToken(): boolean {
+  hasToken(): boolean {
     return !!localStorage.getItem('access_token');
   }
 }

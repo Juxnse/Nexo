@@ -7,15 +7,35 @@
 
   <!-- Tabs -->
   <nav class="tabs">
-    <button [class.active]="activeTab === 'posts'" (click)="setTab('posts')">
+    <button
+      class="tab-btn"
+      [class.active]="activeTab === 'posts'"
+      (click)="setTab('posts')"
+    >
+      <i class="fa-solid fa-pen-nib"></i>
       Publicaciones
     </button>
-    <button [class.active]="activeTab === 'members'" (click)="setTab('members')">
+
+    <button
+      class="tab-btn"
+      [class.active]="activeTab === 'members'"
+      (click)="setTab('members')"
+    >
+      <i class="fa-solid fa-users"></i>
       Miembros
     </button>
-    <button [class.active]="activeTab === 'events'" (click)="setTab('events')">
+
+    <button
+      class="tab-btn"
+      [class.active]="activeTab === 'events'"
+      (click)="setTab('events')"
+    >
+      <i class="fa-solid fa-calendar-days"></i>
       Eventos
     </button>
+
+    <!-- Línea animada -->
+    <div class="tab-indicator" [ngStyle]="getTabIndicatorStyle()"></div>
   </nav>
 
   <!-- Contenido dinámico -->
@@ -23,18 +43,29 @@
     <!-- POSTS -->
     <ng-container *ngIf="activeTab === 'posts'">
       <div class="create-post">
-        <textarea [(ngModel)]="newPost" placeholder="Escribe tu publicación..."></textarea>
-        <button (click)="createPost()" [disabled]="creatingPost || !newPost.trim()">
+        <textarea
+          [(ngModel)]="newPost"
+          placeholder="Escribe tu publicación..."
+        ></textarea>
+        <button
+          (click)="createPost()"
+          [disabled]="creatingPost || !newPost.trim()"
+        >
           {{ creatingPost ? 'Publicando...' : 'Publicar' }}
         </button>
       </div>
 
-      <div *ngIf="loadingPosts">Cargando posts...</div>
-      <div *ngIf="!loadingPosts && posts.length === 0">No hay publicaciones todavía.</div>
+      <div *ngIf="!loadingPosts && posts.length === 0">
+        No hay publicaciones todavía.
+      </div>
 
       <div class="post-card" *ngFor="let post of posts">
         <div class="author">
-          <img *ngIf="post.author.picture" [src]="post.author.picture" alt="avatar" />
+          <img
+            *ngIf="post.author.picture"
+            [src]="post.author.picture"
+            alt="avatar"
+          />
           <strong>{{ post.author.name || post.author.email }}</strong>
           <span>{{ post.created_at | date: 'short' }}</span>
         </div>
@@ -44,27 +75,44 @@
 
     <!-- MEMBERS -->
     <ng-container *ngIf="activeTab === 'members'">
-      <div *ngIf="loadingMembers">Cargando miembros...</div>
-      <div *ngIf="!loadingMembers && members.length === 0">No hay miembros todavía.</div>
+      <div *ngIf="!loadingMembers && members.length === 0">
+        No hay miembros todavía.
+      </div>
 
-      <!-- Botón unirse -->
       <div class="join-group" *ngIf="currentUserId && !isMemberActive()">
         <button (click)="joinGroup()" [disabled]="joining">
           {{ joining ? 'Uniéndose...' : 'Unirme al grupo' }}
         </button>
       </div>
 
-      <!-- Listado -->
       <div class="member-card" *ngFor="let m of members">
-        <strong>{{ m.user.name || m.user.email }}</strong>
-        <span>Rol: {{ m.role }}</span>
-        <span>Status: {{ m.status }}</span>
+        <div class="id">
+          <img *ngIf="m.user.picture" [src]="m.user.picture" alt="avatar" />
+          <div class="avatar" *ngIf="!m.user.picture">
+            {{ (m.user.name || m.user.email) | slice: 0:1 | uppercase }}
+          </div>
+
+          <div class="meta">
+            <strong class="name">{{ m.user.name || m.user.email }}</strong>
+            <small *ngIf="m.user.name" class="email">{{ m.user.email }}</small>
+          </div>
+        </div>
+
+        <span class="pill role" [ngClass]="'role--' + (m.role || 'member')">
+          {{ m.role | titlecase }}
+        </span>
+        <span
+          class="pill status"
+          [ngClass]="'status--' + (m.status || 'active')"
+        >
+          {{ m.status | titlecase }}
+        </span>
       </div>
     </ng-container>
 
     <!-- EVENTS -->
-    <ng-container *ngIf="activeTab === 'events'">
-      <p>Aquí irán los eventos del grupo...</p>
+    <ng-container *ngIf="activeTab === 'events' && group?.id">
+      <app-group-events [groupId]="group!.id"></app-group-events>
     </ng-container>
   </div>
 </div>

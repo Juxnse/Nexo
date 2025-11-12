@@ -1,17 +1,52 @@
-<div class="profile-container">
-  <h2>Mi Perfil</h2>
+<div class="profile-wrapper">
+  <!-- Encabezado del perfil -->
+  <div class="profile-header">
+    <div class="profile-avatar">
+      <img
+        [src]="user?.picture || 'assets/default-avatar.png'"
+        alt="Foto de perfil"
+      />
+    </div>
+    <div class="profile-info">
+      <h2>{{ user?.name || 'Usuario' }}</h2>
+      <p class="email">{{ user?.email }}</p>
+      <span class="user-id">ID: {{ user?.userId }}</span>
+    </div>
+  </div>
 
-  <div *ngIf="loading">Cargando...</div>
-  <div *ngIf="errorMessage">{{ errorMessage }}</div>
-
-  <div *ngIf="user">
-    <p><strong>ID:</strong> {{ user.userId }}</p>
-    <p><strong>Email:</strong> {{ user.email }}</p>
-    <p *ngIf="user.name"><strong>Nombre:</strong> {{ user.name }}</p>
-    <div *ngIf="user.picture">
-      <img [src]="user.picture" alt="Foto de perfil" width="100" />
+  <!-- Contenido principal -->
+  <div class="profile-body" *ngIf="user">
+    <div class="info-card">
+      <h3>Información personal</h3>
+      <ul>
+        <li>
+          <strong>Nombre:</strong>
+          <span>{{ user?.name || 'No especificado' }}</span>
+        </li>
+        <li>
+          <strong>Email:</strong>
+          <span>{{ user?.email }}</span>
+        </li>
+        <li>
+          <strong>Identificador:</strong>
+          <span>{{ user?.userId }}</span>
+        </li>
+      </ul>
     </div>
 
-    <button (click)="logout()">Cerrar sesión</button>
+    <div class="actions-card">
+      <h3>Acciones</h3>
+      <div class="actions">
+        <button class="btn edit" (click)="editProfile()">Editar perfil</button>
+        <button class="btn logout" (click)="logout()">Cerrar sesión</button>
+      </div>
+    </div>
   </div>
+
+  <!-- Estados de carga y error -->
+  <div *ngIf="loading" class="loading">
+    <span class="loader"></span>
+    <p>Cargando perfil...</p>
+  </div>
+  <div *ngIf="errorMessage" class="error">{{ errorMessage }}</div>
 </div>
