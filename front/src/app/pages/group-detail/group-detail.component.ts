@@ -8,6 +8,7 @@ import { GroupsService, Group } from '../../core/groups.service';
 import { AuthService } from '../../core/auth.service';
 import { EventsComponent } from '../events/events.component';
 
+
 @Component({
   selector: 'app-group-detail',
   standalone: true,
@@ -128,6 +129,7 @@ export class GroupDetailComponent implements OnInit {
         this.posts.unshift(post);
         this.newPost = '';
         this.creatingPost = false;
+        this.loadPosts();
       },
       error: (err) => {
         console.error(err);

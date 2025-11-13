@@ -17,28 +17,28 @@
   <!-- Contenido principal -->
   <div class="profile-body" *ngIf="user">
     <div class="info-card">
-      <h3>Información personal</h3>
+      <h3>Personal Information</h3>
       <ul>
         <li>
-          <strong>Nombre:</strong>
-          <span>{{ user?.name || 'No especificado' }}</span>
+          <strong>Name:</strong>
+          <span>{{ user?.name || 'No specified' }} </span>
         </li>
         <li>
           <strong>Email:</strong>
           <span>{{ user?.email }}</span>
         </li>
         <li>
-          <strong>Identificador:</strong>
+          <strong>Identifier:</strong>
           <span>{{ user?.userId }}</span>
         </li>
       </ul>
     </div>
 
     <div class="actions-card">
-      <h3>Acciones</h3>
+      <h3>Actions</h3>
       <div class="actions">
-        <button class="btn edit" (click)="editProfile()">Editar perfil</button>
-        <button class="btn logout" (click)="logout()">Cerrar sesión</button>
+        <button class="btn edit" (click)="editProfile()">Edit profile</button>
+        <button class="btn logout" (click)="logout()">Log out</button>
       </div>
     </div>
   </div>
@@ -46,7 +46,7 @@
   <!-- Estados de carga y error -->
   <div *ngIf="loading" class="loading">
     <span class="loader"></span>
-    <p>Cargando perfil...</p>
+    <p>Loading profile...</p>
   </div>
   <div *ngIf="errorMessage" class="error">{{ errorMessage }}</div>
 </div>

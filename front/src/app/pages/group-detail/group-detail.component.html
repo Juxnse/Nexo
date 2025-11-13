@@ -13,7 +13,7 @@
       (click)="setTab('posts')"
     >
       <i class="fa-solid fa-pen-nib"></i>
-      Publicaciones
+      Posts
     </button>
 
     <button
@@ -22,7 +22,7 @@
       (click)="setTab('members')"
     >
       <i class="fa-solid fa-users"></i>
-      Miembros
+      Members
     </button>
 
     <button
@@ -31,32 +31,32 @@
       (click)="setTab('events')"
     >
       <i class="fa-solid fa-calendar-days"></i>
-      Eventos
+      Events
     </button>
 
-    <!-- Línea animada -->
+    <!-- Animated Line -->
     <div class="tab-indicator" [ngStyle]="getTabIndicatorStyle()"></div>
   </nav>
 
-  <!-- Contenido dinámico -->
+  <!-- Dynamic Content -->
   <div class="tab-content">
     <!-- POSTS -->
     <ng-container *ngIf="activeTab === 'posts'">
       <div class="create-post">
         <textarea
           [(ngModel)]="newPost"
-          placeholder="Escribe tu publicación..."
+          placeholder="Write your post..."
         ></textarea>
         <button
           (click)="createPost()"
           [disabled]="creatingPost || !newPost.trim()"
         >
-          {{ creatingPost ? 'Publicando...' : 'Publicar' }}
+          {{ creatingPost ? 'Posting...' : 'Post' }}
         </button>
       </div>
 
       <div *ngIf="!loadingPosts && posts.length === 0">
-        No hay publicaciones todavía.
+        No posts yet.
       </div>
 
       <div class="post-card" *ngFor="let post of posts">
@@ -76,12 +76,12 @@
     <!-- MEMBERS -->
     <ng-container *ngIf="activeTab === 'members'">
       <div *ngIf="!loadingMembers && members.length === 0">
-        No hay miembros todavía.
+        No members yet.
       </div>
 
       <div class="join-group" *ngIf="currentUserId && !isMemberActive()">
         <button (click)="joinGroup()" [disabled]="joining">
-          {{ joining ? 'Uniéndose...' : 'Unirme al grupo' }}
+          {{ joining ? 'Joining...' : 'Join Group' }}
         </button>
       </div>
 
@@ -94,7 +94,7 @@
 
           <div class="meta">
             <strong class="name">{{ m.user.name || m.user.email }}</strong>
-            <small *ngIf="m.user.name" class="email">{{ m.user.email }}</small>
+            <small *ngIf="m.user.name" class="email"> {{ m.user.email }}</small>
           </div>
         </div>
 

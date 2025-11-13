@@ -1,12 +1,12 @@
   <div class="groups-page">
-    <h2>Comunidades</h2>
+    <h2>Communities</h2>
 
     <div *ngIf="loading" class="loading">
-      Cargando comunidades...
+      Loading communities...
     </div>
 
     <div *ngIf="!loading && groups.length === 0" class="empty">
-      No se encontraron grupos.
+      No communities found.
     </div>
 
     <div class="group-list" *ngIf="!loading && groups.length > 0">
@@ -19,7 +19,7 @@
           </div>
         </div>
         <div class="group-footer">
-          <a [routerLink]="['/groups', g.id]" class="btn">Ver más</a>
+          <a [routerLink]="['/groups', g.id]" class="btn">See more</a>
         </div>
       </div>
     </div>
