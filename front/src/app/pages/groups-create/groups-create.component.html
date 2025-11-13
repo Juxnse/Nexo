@@ -1,37 +1,37 @@
 <div class="create-group">
-  <h2>Crear nueva comunidad</h2>
+  <h2>Create New Community</h2>
 
   <form (ngSubmit)="createGroup()">
-    <label>Nombre</label>
+    <label>Name</label>
     <input [(ngModel)]="name" name="name" required />
 
-    <label>Descripción</label>
+    <label>Description</label>
     <textarea [(ngModel)]="description" name="description"></textarea>
 
-    <label>Visibilidad</label>
+    <label>Visibility</label>
     <select [(ngModel)]="visibility" name="visibility">
-      <option value="public">Pública</option>
-      <option value="private">Privada</option>
+      <option value="public">Public</option>
+      <option value="private">Private</option>
     </select>
 
-    <label>Política de unión</label>
+    <label>Join Policy</label>
     <select [(ngModel)]="join_policy" name="join_policy">
-      <option value="open">Abierta</option>
-      <option value="request">Solicitud</option>
-      <option value="invite">Invitación</option>
+      <option value="open">Open</option>
+      <option value="request">Request to Join</option>
+      <option value="invite">By Invitation</option>
     </select>
 
-    <label>Ciudad</label>
+    <label>City</label>
     <input [(ngModel)]="city" name="city" />
 
-    <label>País</label>
+    <label>Country</label>
     <input [(ngModel)]="country" name="country" />
 
-    <label>Tags (separados por coma)</label>
+    <label>Tags (comma separated)</label>
     <input [(ngModel)]="tags" name="tags" />
 
     <button type="submit" [disabled]="creating">
-      {{ creating ? 'Creando...' : 'Crear grupo' }}
+      {{ creating ? 'Creating...' : 'Create Community' }}
     </button>
   </form>
 </div>

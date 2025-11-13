@@ -1,7 +1,7 @@
 <div class="login-container">
-  <h2>Bienvenido</h2>
+  <h2>Welcome</h2>
 
-  <!-- 🔹 Login con Google -->
+  <!-- 🔹 Login with Google -->
   <button class="google-btn" (click)="loginGoogle()">
     <img
       src="https://developers.google.com/identity/images/g-logo.png"
@@ -9,17 +9,17 @@
       width="20"
       style="margin-right: 8px; vertical-align: middle"
     />
-    Ingresar con Google
+    Sign in with Google
   </button>
 
-  <h3>O con tu correo</h3>
+  <h3>Or with your email</h3>
 
-  <!-- 🔹 Login con email/password -->
+  <!-- 🔹 Login with email/password -->
   <div class="form-group">
-    <input [(ngModel)]="email" type="email" placeholder="Correo electrónico" />
-    <input [(ngModel)]="password" type="password" placeholder="Contraseña" />
+    <input [(ngModel)]="email" type="email" placeholder="Email address" />
+    <input [(ngModel)]="password" type="password" placeholder="Password" />
     <button (click)="loginWithPassword()" [disabled]="loading">
-      {{ loading ? 'Ingresando...' : 'Ingresar' }}
+      {{ loading ? 'Signing in...' : 'Sign in' }}
     </button>
   </div>
 
@@ -28,12 +28,12 @@
   <!-- Links -->
   <div class="login-footer">
     <p>
-      ¿No tienes cuenta?
-      <a routerLink="/register" class="link-to-register">Regístrate aquí</a>
+      Don’t have an account?
+      <a routerLink="/register" class="link-to-register">Register here</a>
     </p>
     <p>
-      ¿Prefieres otro método?
-      <a routerLink="/otp" class="link-to-otp">Inicia con código temporal</a>
+      Prefer another method?
+      <a routerLink="/otp" class="link-to-otp">Sign in with a temporary code</a>
     </p>
   </div>
 </div>

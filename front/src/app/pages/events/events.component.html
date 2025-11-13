@@ -1,44 +1,44 @@
 <div class="group-events">
-  <!-- CREAR EVENTO -->
+  <!-- CREATE EVENT -->
   <div class="create-event">
-    <h3><i class="fa-solid fa-calendar-plus"></i> Crear nuevo evento</h3>
+    <h3><i class="fa-solid fa-calendar-plus"></i> Create New Event</h3>
 
-    <input type="text" [(ngModel)]="newEvent.title" placeholder="Título del evento" />
-    <textarea [(ngModel)]="newEvent.description" placeholder="Descripción (opcional)"></textarea>
+    <input type="text" [(ngModel)]="newEvent.title" placeholder="Event title" />
+    <textarea [(ngModel)]="newEvent.description" placeholder="Description (optional)"></textarea>
 
     <div class="dates">
       <div>
-        <label>Inicio:</label>
+        <label>Start:</label>
         <input type="datetime-local" [(ngModel)]="newEvent.start_at" />
       </div>
       <div>
-        <label>Fin:</label>
+        <label>End:</label>
         <input type="datetime-local" [(ngModel)]="newEvent.end_at" />
       </div>
     </div>
 
-    <input type="text" [(ngModel)]="newEvent.venue_name" placeholder="Lugar o link del evento" />
-    <input type="number" [(ngModel)]="newEvent.capacity" placeholder="Capacidad (opcional)" />
+    <input type="text" [(ngModel)]="newEvent.venue_name" placeholder="Event location or link" />
+    <input type="number" [(ngModel)]="newEvent.capacity" placeholder="Capacity (optional)" />
 
     <button (click)="createEvent()" [disabled]="creating">
       <i class="fa-solid fa-circle-check"></i>
-      {{ creating ? 'Creando...' : 'Crear evento' }}
+      {{ creating ? 'Creating...' : 'Create Event' }}
     </button>
   </div>
 
-  <!-- LISTADO DE EVENTOS -->
+  <!-- EVENT LIST -->
   <div class="event-list">
-    <h3><i class="fa-solid fa-calendar-days"></i> Próximos eventos</h3>
+    <h3><i class="fa-solid fa-calendar-days"></i> Upcoming Events</h3>
 
     <div *ngIf="events.length === 0" class="no-events">
-      No hay eventos aún.
+      No events yet.
     </div>
 
     <div *ngFor="let ev of events" class="event-card">
       <div class="event-banner"></div>
       <div class="event-info">
         <h4>{{ ev.title }}</h4>
-        <p class="desc">{{ ev.description || 'Sin descripción' }}</p>
+        <p class="desc">{{ ev.description || 'No description' }}</p>
 
         <p class="datetime">
           <i class="fa-regular fa-clock"></i>
@@ -47,18 +47,18 @@
 
         <p class="venue">
           <i class="fa-solid fa-location-dot"></i>
-          {{ ev.venue_name || 'Por definir' }}
-          <span *ngIf="ev.capacity"> | Capacidad: {{ ev.capacity }}</span>
+          {{ ev.venue_name || 'To be defined' }}
+          <span *ngIf="ev.capacity"> | Capacity: {{ ev.capacity }}</span>
         </p>
 
-        <!-- BOTONES DE ASISTENCIA -->
+        <!-- RSVP BUTTONS -->
         <div class="rsvp-buttons">
           <button
             class="btn attending"
             [class.active]="ev.user_status === 'attending'"
             (click)="setRSVP(ev, 'attending')"
           >
-            <i class="fa-solid fa-check"></i> Asistiré
+            <i class="fa-solid fa-check"></i> I’m going
           </button>
 
           <button
@@ -66,7 +66,7 @@
             [class.active]="ev.user_status === 'interested'"
             (click)="setRSVP(ev, 'interested')"
           >
-            <i class="fa-solid fa-star"></i> Interesado
+            <i class="fa-solid fa-star"></i> Interested
           </button>
 
           <button
@@ -74,7 +74,7 @@
             [class.active]="ev.user_status === 'declined'"
             (click)="setRSVP(ev, 'declined')"
           >
-            <i class="fa-solid fa-xmark"></i> No asistiré
+            <i class="fa-solid fa-xmark"></i> Not going
           </button>
         </div>
       </div>
