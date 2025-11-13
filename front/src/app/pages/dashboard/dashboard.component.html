@@ -9,15 +9,15 @@
       </ng-template>
 
       <div class="user-text">
-        <h2>Bienvenido a tu panel</h2>
+        <h2>Welcome to your Dashboard</h2>
         <p *ngIf="userEmail">
-          Has iniciado sesión como <strong>{{ userEmail }}</strong>
+          Signed in as <strong>{{ userEmail }}</strong>
         </p>
       </div>
     </div>
 
     <button class="btn-logout" (click)="logout()">
-      <i class="fa-solid fa-right-from-bracket"></i> Cerrar sesión
+      <i class="fa-solid fa-right-from-bracket"></i> Log out
     </button>
   </header>
 
@@ -26,67 +26,52 @@
     <!-- Perfil -->
     <div class="card">
       <div class="icon profile"><i class="fa-solid fa-user"></i></div>
-      <h3>Tu perfil</h3>
-      <p>Consulta y actualiza tu información personal.</p>
-      <a routerLink="/profile" class="btn btn-primary">Ver perfil</a>
+      <h3>Profile</h3>
+      <p>View and update your personal information.</p>
+      <a routerLink="/profile" class="btn btn-primary">View Profile</a>
     </div>
 
     <!-- Comunidades -->
     <div class="card">
       <div class="icon community"><i class="fa-solid fa-people-group"></i></div>
-      <h3>Comunidades</h3>
-      <p>Explora las comunidades existentes o crea la tuya propia.</p>
+      <h3>Communities</h3>
+      <p>Explore existing communities or create your own.</p>
       <div class="actions">
-        <a routerLink="/groups" class="btn btn-primary">Ver comunidades</a>
-        <a routerLink="/groups/create" class="btn btn-outline">Crear comunidad</a>
+        <a routerLink="/groups" class="btn btn-primary">View Communities</a>
+        <a routerLink="/groups/create" class="btn btn-outline">Create Community</a>
       </div>
     </div>
 
-    <!-- Eventos -->
-    <div class="card">
-      <div class="icon events"><i class="fa-solid fa-calendar-days"></i></div>
-      <h3>Eventos</h3>
-      <p>Consulta y organiza eventos de tus comunidades.</p>
-      <div class="actions">
-        <!-- ✅ Ahora redirige a grupos, no rutas inexistentes -->
-        <a routerLink="/groups" class="btn btn-primary">Ver eventos</a>
-        <a routerLink="/groups/create" class="btn btn-outline">Crear evento</a>
-      </div>
-    </div>
-
-    <!-- Notificaciones -->
+    <!-- Metrics & Engagement -->
     <div class="card">
       <div class="icon notifications"><i class="fa-solid fa-bell"></i></div>
-      <h3>Notificaciones</h3>
-      <p>Próximamente podrás ver tus alertas y actividades recientes.</p>
-      <button class="btn btn-disabled" disabled>En desarrollo</button>
+      <h3>Metrics & Engagement</h3>
+      <p>Soon you’ll be able to view the engagement and metrics of your activities.</p>
+      <button class="btn btn-disabled" disabled>In development</button>
     </div>
+
   </section>
 
   <!-- Eventos destacados -->
   <section class="featured-events" *ngIf="featuredEvents.length > 0">
-    <h3>Eventos destacados</h3>
+    <h3>Featured Events</h3>
 
-    <div *ngIf="loadingEvents" class="loading">Cargando eventos...</div>
+    <div *ngIf="loadingEvents" class="loading">Loading events...</div>
 
     <div class="events-scroll" *ngIf="!loadingEvents">
       <div class="event-card" *ngFor="let e of featuredEvents">
         <div class="event-banner"></div>
         <div class="event-info">
           <h4>{{ e.title }}</h4>
-          <p>Grupo: {{ e.group_name || 'Comunidad desconocida' }}</p>
+          <p>Group: {{ e.groups.name || 'Unknown community' }}</p>
           <p class="date">
             <i class="fa-regular fa-clock"></i>
             {{ e.start_at | date: 'longDate' }},
             {{ e.start_at | date: 'shortTime' }}
           </p>
-          <!-- ✅ Ahora usa queryParams (no fragment) -->
-          <a
-            class="btn-view"
-            [routerLink]="['/groups', e.group_id]"
-            [queryParams]="{ tab: 'events' }"
-            >Ver eventos</a
-          >
+          <a class="btn-view" [routerLink]="['/groups', e.group_id]" [queryParams]="{ tab: 'events' }">
+            View events
+          </a>
         </div>
       </div>
     </div>

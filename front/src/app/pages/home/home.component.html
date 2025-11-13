@@ -1,46 +1,105 @@
 <div class="home-container">
   <!-- Hero -->
   <section class="hero">
-    <h1>Bienvenido a <span>Nexo</span></h1>
+    <h1>Join the <span>Nexo</span> experience!</h1>
     <p>
-      Donde las personas y las ideas se encuentran.  
+      Where people and ideas come together.
     </p>
 
     <div class="cta-buttons">
-      <a routerLink="/login" class="btn btn-primary">Iniciar sesión</a>
-      <a routerLink="/register" class="btn btn-secondary">Crear cuenta</a>
+      <a routerLink="/login" class="btn btn-primary">Sign in</a>
+      <a routerLink="/register" class="btn btn-secondary">Create account</a>
     </div>
   </section>
 
   <!-- Features -->
   <section class="features">
     <div class="feature-card">
-      <h3>Descubre eventos</h3>
+      <h3>Discover Events</h3>
       <p>
-        Explora encuentros creados por la comunidad: tecnología, música,
-        deportes y mucho más.
+        Explore community-created gatherings — tech, music, sports, and much more.
       </p>
     </div>
     <div class="feature-card">
-      <h3>Únete fácilmente</h3>
+      <h3>Join Easily</h3>
       <p>
-        Participa en eventos con un solo clic y guarda tus favoritos en tu
-        perfil.
+        Take part in events with just one click and save your favorites to your profile.
       </p>
     </div>
     <div class="feature-card">
-      <h3>Organiza tus propios</h3>
+      <h3>Host Your Own Events</h3>
       <p>
-        Comparte tus ideas, crea tu evento y conecta con las personas que
-        buscan lo mismo que tú.
+        Share your ideas, create an event, and connect with people who are looking for the same things you are.
       </p>
     </div>
   </section>
 
+  <!-- About Nexo -->
+  <section class="about">
+    <div class="about-content">
+      <div class="about-text">
+        <h2>What is Nexo?</h2>
+        <p>
+          Nexo is a platform that connects people through shared interests and events.
+          Whether you want to attend inspiring meetups or organize your own, Nexo makes it
+          simple to discover, join, and create meaningful experiences.
+        </p>
+        <p>
+          Our mission is to bring communities together — one event at a time.
+        </p>
+      </div>
+      <div class="about-image">
+        <img src="images/Meeting.png" alt="People connecting at an event">
+      </div>
+    </div>
+  </section>
+
+  <!-- Pricing -->
+  <section class="pricing">
+    <h2>Plans & Pricing</h2>
+    <p>Choose the plan that fits your needs and start connecting today.</p>
+
+    <div class="pricing-cards">
+      <div class="pricing-card">
+        <h3>Free</h3>
+        <p class="price">$0/month</p>
+        <ul>
+          <li>Join unlimited events</li>
+          <li>Save your favorites</li>
+          <li>Basic profile customization</li>
+        </ul>
+        <a routerLink="/register" class="btn btn-secondary">Get Started</a>
+      </div>
+
+      <div class="pricing-card highlight">
+        <h3>Pro</h3>
+        <p class="price">$9.99/month</p>
+        <ul>
+          <li>Host unlimited events</li>
+          <li>Advanced analytics</li>
+          <li>Priority support</li>
+        </ul>
+        <a routerLink="/register" class="btn btn-highlight">Upgrade Now</a>
+      </div>
+
+      <div class="pricing-card">
+        <h3>Team</h3>
+        <p class="price">$19.99/month</p>
+        <ul>
+          <li>Team management tools</li>
+          <li>Branded event pages</li>
+          <li>Custom integrations</li>
+        </ul>
+        <a class="btn btn-disabled" tabindex="-1" aria-disabled="true">Soon</a>
+      </div>
+    </div>
+  </section>
+
+
   <!-- Footer CTA -->
   <section class="footer-cta">
-    <h2>¿Listo para comenzar?</h2>
-    <p>Únete a la comunidad y vive experiencias únicas con Nexo.</p>
-    <a routerLink="/register" class="btn btn-highlight">Empieza ahora</a>
+    <h2>Ready to join?</h2>
+    <p>Be part of the Nexo community and start creating new connections today.</p>
+    <a routerLink="/register" class="btn btn-highlight">Get Started</a>
   </section>
 </div>
